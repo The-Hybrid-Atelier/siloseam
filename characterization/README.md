@@ -11,9 +11,16 @@ The files has been named in the following format:
 SVG (Scalable Vector Graphics) images can be created and edited with any text editor, as well as with drawing software.
 STL (an abbreviation of "stereolithography")are for 3d printing. 
 
-*_design.svg files present our base design which you can drag and drop into the Siloseam app and generate the mold and it's respected separator through the app. 
- *_fab.svg files have both separator and the mold design included which has been generated through the Siloseam app and it is ready to be fabricated.
- *_mold.stl files the the generated molds for that specific design and it is ready to be inserted into the 3d printer application and from there you can send it to your printer. 
+### How to Use - Customize Experiment
+#### Files
+***_design.svg** files present our base design which you can drag and drop into the Siloseam app and generate the mold and it's respected separator through the app. 
+
+If you are interested to design your own experiment from scrath or modify one of the existing *_design.svg files from our process, you can drag and drop your svg file in the Siloseam app and generate the mold and separator for your design.
+You can find the active link to the Siloseam app [here](https://github.com/The-Hybrid-Atelier/siloseam/blob/master/tool/README_app.md).
+
+### How to Use - Replicate Experiment
+ ***_fab.svg** files have both separator and the mold design included which has been generated through the Siloseam app and it is ready to be fabricated.
+ ***_mold.stl** files the the generated molds for that specific design and it is ready to be inserted into the 3d printer application and from there you can send it to your printer. 
  
  In order to replecate our designs you can use the *_fab.svg file and *_mold.stl. There is no need to modify and recreate the molds from *_design.svg file.
  
@@ -25,8 +32,6 @@ STL (an abbreviation of "stereolithography")are for 3d printing.
  To learn more about step by step bladder fabrication pricess please click here (ADD LINK).
  
  
- However, if you are interested to design your own experiment from scrath or modify one of the existing *_design.svg files from our process, you can drag and drop your svg file in the Siloseam app and generate the mold and separator for your design.
- You can find the active link to the Siloseam app [here](https://github.com/The-Hybrid-Atelier/siloseam/blob/master/tool/README_app.md).
 
 ## Experiments
 * Basic -> This experiment presents a simple and basic single bladder design.
