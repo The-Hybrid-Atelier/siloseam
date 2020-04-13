@@ -18,11 +18,11 @@ STL (an abbreviation of "stereolithography")are for 3d printing.
  In order to replecate our designs you can use the *_fab.svg file and *_mold.stl. There is no need to modify and recreate the molds from *_design.svg file.
  
  You can print the mold and use the separaor layer in *_fab.svg file to print the separator as well.
- For more information related to separator material and process please click here (ADD the Link).
+ For more information related to separator material and process please click here (ADD LINK)).
  On these experiments we used vynal as our main separator material.
  
  After you have the mold 3d printed and have your separator ready, you can begin the bladder fabrication process.
- To learn more about step by step bladder fabrication pricess please click here (ADD the Li).
+ To learn more about step by step bladder fabrication pricess please click here (ADD LINK).
  
  
  However, if you are interested to design your own experiment from scrath or modify one of the existing *_design.svg files from our process, you can drag and drop your svg file in the Siloseam app and generate the mold and separator for your design.
@@ -43,8 +43,8 @@ Even though Silicone does not stick to any material except itself, some material
 
 
 ## Rig
-We designed and used this object for our testing process. Some time fabrication process can have issues such as air bubbles which can weaken the bladder and cause erruption. To make sure we have a fully functional bladder we do need to test them after fabrication process is over.
-We can insert an air tube inside the bladder and use this Rig to hold the tube in a steady position while you can inject air into the bladder from the other side of the tube. For injecting air we used a air brush machine and we set it on 10-20 PSI.
+We designed and used this object for our testing process. Some time fabrication process can have issues such as air bubbles which can weaken the bladder and cause eruption. To make sure we have a fully functional bladder we do need to test them after the fabrication process is over.
+We can insert an air tube inside the bladder and use this Rig to hold the tube in a steady position while you can inject air into the bladder from the other side of the tube. For injecting air we used an airbrush machine and we set it on 10-20 PSI.
+You can find the link to the rig object design files in thingiverse here. (ADD LINK)
 
-
-* You can go back to the Characterization design files in Thingerverse through [here](https://www.thingiverse.com/thing:4283808/files)
+* You can go back to the Characterization design files in Thingerverse through [here](https://www.thingiverse.com/thing:4283808/files).
