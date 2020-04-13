@@ -41,6 +41,7 @@ STL (an abbreviation of "stereolithography")are for 3d printing.
 * Material Warnings:
 Even though Silicone does not stick to any material except itself, some materials can affect the curing process of the silicone. Materials such as resin, or wood can not be in direct contact with the silicone. They can cause a change of behavior on the silicone and block the curing process from happening. You can use these materials if they are coated twice with acrylic paint. 
 
+// hedieh: What are our settings?? 
 
 ## Rig
 We designed and used this object for our testing process. Some time fabrication process can have issues such as air bubbles which can weaken the bladder and cause eruption. To make sure we have a fully functional bladder we do need to test them after the fabrication process is over.
