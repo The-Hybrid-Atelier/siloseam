@@ -12,7 +12,6 @@ SVG (Scalable Vector Graphics) images can be created and edited with any text ed
 STL (an abbreviation of "stereolithography")are for 3d printing. 
 
 ### How to Use - Customize Experiment
-#### Files
 ***_design.svg** files present our base design which you can drag and drop into the Siloseam app and generate the mold and it's respected separator through the app. 
 
 If you are interested to design your own experiment from scrath or modify one of the existing *_design.svg files from our process, you can drag and drop your svg file in the Siloseam app and generate the mold and separator for your design.
@@ -41,14 +40,16 @@ You can find the active link to the Siloseam app [here](https://github.com/The-H
 * Size -> This experiment is similar to the Seam Width but here the seam size is the constant variable and the size of the bladder itself will change. 
 * Shape -> This experiment showcases the effect of different shapes on the straight and behavior of the bladder. 
 
-## 3d Printer Setting
+## 3D Printer Setting
+We printed these files using an Ultimaker 3 with ABS filament at 0.2mm layer height and a 0.4mm nozzle. 
 
-* Material Warnings:
-Even though Silicone does not stick to any material except itself, some materials can affect the curing process of the silicone. Materials such as resin, or wood can not be in direct contact with the silicone. They can cause a change of behavior on the silicone and block the curing process from happening. You can use these materials if they are coated twice with acrylic paint. 
 
-// hedieh: What are our settings?? 
+> **Material Warning**
+> Even though silicone does not stick to any material except itself, some materials can affect the curing process of the silicone. Materials such as resin, or wood can not be in direct contact with the silicone. They can cause a change of behavior on the silicone and block the curing process from happening. You can use these materials if they are coated twice with acrylic paint. 
 
-## Rig
+
+
+## Testing Procedure
 We designed and used this object for our testing process. Some time fabrication process can have issues such as air bubbles which can weaken the bladder and cause eruption. To make sure we have a fully functional bladder we do need to test them after the fabrication process is over.
 We can insert an air tube inside the bladder and use this Rig to hold the tube in a steady position while you can inject air into the bladder from the other side of the tube. For injecting air we used an airbrush machine and we set it on 10-20 PSI.
 You can find the link to the rig object design files in thingiverse here. (ADD LINK)
