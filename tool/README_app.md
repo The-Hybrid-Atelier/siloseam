@@ -9,7 +9,7 @@ A live version of the Siloseam Design Tool is available at:
 To install on your local machine, you will need Ruby on Rails configured. 
 Our implementation uses ruby 2.6.3.
 
-```
+```bash
 # environment setup
 rvm install ruby_2.6.3
 rvm use ruby-2.6.3
