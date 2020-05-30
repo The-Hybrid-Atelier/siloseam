@@ -20,7 +20,7 @@ This repository is the official implementation of the DIS2020 paper [Siloseam](T
 
 ### Textured Squeeze Bladder
 * Instructable A: [Making a Textured Squeeze Bladder](https://www.instructables.com/id/Silicone-Textured-Inflatable-Squeeze-Bulb/)
-* Instructable A Files: [Textured Squeeze Files](https://www.thingiverse.com/thing:4399272/files)
+* Design Files: [Textured Squeeze Files](https://www.thingiverse.com/thing:4399272/files)
 
 ### Octopus
 * Design Files: [Octopus](http://hybridatelier.uta.edu/projects/38-siloseam)
