@@ -23,6 +23,7 @@ This repository is the official implementation of the DIS2020 paper [Siloseam](T
 * Instructable A Files: [Textured Squeeze Files](https://www.thingiverse.com/thing:4399272/files)
 
 ### Octopus
+* Design Files: [Octopus](http://hybridatelier.uta.edu/projects/38-siloseam)
 * Video: [Designing a Silicone Bladder](https://youtu.be/BlMqOIE3d1k)
 * Video: [Fabbing a Silicone Bladder](https://youtu.be/CAZFEzSPMgg)
 
