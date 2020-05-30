@@ -29,4 +29,4 @@ This repository is the official implementation of the DIS2020 paper [Siloseam](T
 
 ## Contributing
 The material available through this repository is open-source under the MIT License. 
-We welcome contributions of community-made designs! You can either submit a pull request via Github or send us a link to your Instructables, Thingiverse, or design files to hybrid.atelier.uta@uta.edu
+We welcome contributions of community-made designs! You can either submit a pull request via Github or send us a link to your Instructables, Thingiverse, or design files to hybrid.atelier.uta@gmail.com
