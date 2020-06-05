@@ -29,6 +29,8 @@ Run:
 bundle install
 rails server
 ```
+Open a web browser (we recommend Chrome) and point it to: 
+`localhost:3000`
 
 ## How to Use the Tool
 Check out our instructable and YouTube video going through the process. 
