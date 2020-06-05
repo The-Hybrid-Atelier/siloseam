@@ -103,7 +103,7 @@ GEM
     minitest (5.13.0)
     mysql2 (0.5.2)
     nio4r (2.3.1)
-    nokogiri (1.10.5)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     paperjs (0.11.5)
     rack (2.0.8)
