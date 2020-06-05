@@ -1,7 +1,7 @@
-#silicone-pane-tool
+#Siloseam Tool
 =========
 
-An program that takes an annotated SVG files and produces SVGs for creating expressive silicone bladders. 
+This application takes an annotated SVG files and produces SVGs for custom bladder molds. 
 
 We keep a running version of this Rails app on our server at: 
 
