@@ -5,7 +5,7 @@ This application takes an annotated SVG files and produces SVGs for custom bladd
 
 We keep a running version of this Rails app on our server at: 
 
-* [Siloseam App] https://hybridatelier.uta.edu/apps/siloseam
+* [Siloseam App](https://hybridatelier.uta.edu/apps/siloseam)
 
 ## Contributors
 
