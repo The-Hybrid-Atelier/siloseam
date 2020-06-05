@@ -1,4 +1,5 @@
-# Design Examples
+Design Examples
+=====
 ## How to Use
 Description of files and where to use them. 
 
