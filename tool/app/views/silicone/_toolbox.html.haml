@@ -1,0 +1,52 @@
+:css
+  #toolbox .btn-group{
+    margin-right: 5px;
+  }
+#toolbox.shadowed
+  = button_tag :id => "transform-tool", :class => "btn btn-default" do
+    %span.icon-primary-cursor
+  = button_tag :id => "multi-select-tool", :class => "btn btn-default" do
+    %span.glyphicon.glyphicon-screenshot
+  = button_tag :id => "path-tool", :class => "btn btn-default" do
+    %span.icon-path-draw
+  .btn-group{"aria-label" => "pen-tools", :role => "group"}
+    = button_tag :id => "anchor-tool", :class => "btn btn-default" do
+      %span.icon-pen-tool
+    = button_tag :class => "btn btn-default" do
+      %span.icon-pen-add-tool
+    = button_tag :class => "btn btn-default" do
+      %span.icon-pen-remove-tool
+  - button_tag :class => "btn btn-default" do
+    %span.icon-noun_68342_cc
+  - button_tag :class => "btn btn-default" do
+    %span.icon-bezier-select
+  - button_tag :class => "btn btn-default" do
+    %span.icon-anchor-select
+  .btn-group{"aria-label" => "item-tools", :role => "group"}
+    = button_tag :id => "bring-to-front", :class => "btn btn-primary" do
+      %span.glyphicon.glyphicon-arrow-up
+    = button_tag :id => "send-to-back", :class => "btn btn-primary" do
+      %span.glyphicon.glyphicon-arrow-down
+  .btn-group.pull-right{:role => "group"}
+    = button_tag :id=>"revert", :class=>"btn btn-md btn-default" do
+      %span.glyphicon.glyphicon-refresh
+    = button_tag :id=>"undo", :class=>"btn btn-md btn-default" do
+      %span.glyphicon.glyphicon-arrow-left
+    = button_tag :id=>"save-progress", :class=>"btn btn-md btn-default" do
+      %span.glyphicon.glyphicon-floppy-disk
+    = button_tag :id=>"redo", :class=>"btn btn-md btn-default" do
+      %span.glyphicon.glyphicon-arrow-right
+    = button_tag :id=>"fast-forward", :class=>"btn btn-md btn-default" do
+      %span.glyphicon.glyphicon-repeat
+  / ZOOM TOOLS
+  #zoom-ui.btn-group.pull-right{"aria-label" => "zoom-tools", :role => "group"}
+    = button_tag :id=>"zoom-out", :class=>"btn btn-md btn-warning" do
+      %span.glyphicon.glyphicon-zoom-out
+    = button_tag :id=>"scale", :class=>"btn btn-md btn-warning" do
+      %span.glyphicon.glyphicon-tree-conifer
+    = button_tag :id=>"zoom-in", :class=>"btn btn-md btn-warning" do
+      %span.glyphicon.glyphicon-zoom-in
+  / END ZOOM TOOLS
+  .btn-group.pull-right{:role => "group"}
+    = button_tag :id=>"clear-history", :class=>"btn btn-md btn-danger" do
+      %span.glyphicon.glyphicon-ban-circle

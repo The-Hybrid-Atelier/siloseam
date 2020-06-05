@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="HELLOBLADDER" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 261.2 218" style="enable-background:new 0 0 261.2 218;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:8;stroke-miterlimit:10;}
+</style>
+<g id="SILICONEPANE">
+	<circle id="BLADDER_2_" class="st0" cx="70.2" cy="98.3" r="39.7"/>
+	<circle id="BLADDER_1_" class="st0" cx="208.8" cy="88" r="31"/>
+	<circle id="BLADDER" class="st0" cx="154" cy="182.7" r="13"/>
+	<polyline id="AIRPATH" class="st1" points="58.2,94.3 208.8,88 157.2,185.6 	"/>
+	<line id="AIRTUBE8" class="st2" x1="70.2" y1="0" x2="70.2" y2="46"/>
+</g>
+</svg>

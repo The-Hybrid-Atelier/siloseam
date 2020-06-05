@@ -1,0 +1,32 @@
+:javascript
+  $(function(){
+    $('#save-svg').click(function(){
+      JigExporter.export(factory.paper, factory.canvas, JigExporter.SVG);
+     });
+     $('#save-json').click(function(){
+      JigExporter.export(factory.paper, factory.canvas, JigExporter.JSON);
+     });
+    $('#save-png').click(function(){
+      JigExporter.export(factory.paper, factory.canvas, JigExporter.PNG);
+     });
+    $('#print').click(function(){
+      window.location = "/jig/generator";
+     });
+  });
+%footer#import-export
+  = button_tag :id=> "coil-button", :class => "btn btn-danger btn-sm" do
+    %span.glyphicon.glyphicon-upload
+    Upload Design
+  .btn-group
+    = button_tag :id=> "save-svg", :class => "btn btn-success btn-sm" do
+      %span.glyphicon.glyphicon-save
+      SVG
+    = button_tag :id=> "save-json", :class => "btn btn-success btn-sm" do
+      %span.glyphicon.glyphicon-save
+      JSON
+    = button_tag :id=> "save-png", :class => "btn btn-success btn-sm" do
+      %span.glyphicon.glyphicon-camera
+      PNG
+  = button_tag :id=> "print", :class => "btn btn-default btn-sm" do
+    %span.glyphicon.glyphicon-print
+    Print

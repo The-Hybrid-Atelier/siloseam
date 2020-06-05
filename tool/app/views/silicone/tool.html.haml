@@ -1,0 +1,303 @@
+:coffeescript
+  SILICONE_DENSITY = 0.0001064439 #ECOFLEX-30
+  SidebarController = ->
+    # $('select.dropdown').dropdown()
+
+    $('#materials').change ->
+      console.log "MAT", $(this).val()
+      matIdx = parseInt($(this).val())
+      material = materials.at(matIdx)
+      paths = paper.project.selectedItems
+      _.each paths, (p)->
+        p.setMaterial(material)
+    return
+
+  $ ->
+    $('.ui.dropdown').dropdown()
+    $('.ui.video').video()
+
+    $('#help-button').click ()->
+      $('.help.modal').modal('show')
+    
+    $('canvas').bind 'mousewheel', (e) ->
+      ZOOM_STEP = 0.1
+      ZOOM_MAX = 10
+      ZOOM_MIN = 0.5
+      if e.originalEvent.wheelDelta / 120 > 0
+        paper.project.view.zoom = paper.project.view.zoom + ZOOM_STEP
+      else
+        paper.project.view.zoom = paper.project.view.zoom - ZOOM_STEP
+      
+      if paper.project.view.zoom > 10
+        paper.project.view.zoom = ZOOM_MAX
+      if paper.project.view.zoom < 0.5
+        paper.project.view.zoom = ZOOM_MIN
+      return
+
+  
+    window.dim = new DimensionsPreview($('#sandbox'))
+    window.hl = new HotKeyLegend("/silicone/keys")
+    dim.dom.css
+      bottom: 0
+      right: 0
+      left: 'auto'
+      top: 'auto'
+    dim.set 0, 0, 0
+
+    window.storage = new WebStorage
+    window.gui = new dat.GUI()
+
+    # TOOL SETUP
+    window.factory = new SiliconeTool
+      canvas: $('#main-canvas')
+      name: "Proxy"
+    window.factory.gui()
+
+    $('button#download').click ()->
+      factory.save_svg()
+
+    window.sb = new SidebarController
+    window.materials = new Materials($('#materials'))
+    
+    #STLGenerator Setup
+    window.env = new ThreeEnv($('.threejs-container'))
+
+    $('#threejs-modal .header').click ()->
+      $(this).siblings().toggle()
+    $('#threejs-modal .header').click()
+
+    # LEGEND BINDING
+    $(document).on "paperkeyup", {}, (event, key, modifiers, paths)->
+      # KEY VIEW BINDING
+      $("#actions").find(".action").removeClass('active')
+    
+    $(document).on "paperkeydown", {}, (event, key, modifiers, paths)->
+      meta = _.compact(_.map modifiers, (v, k)-> k if v)
+      key_search_selector = "[data-key='"+key+"']"
+      key_search_selector = key_search_selector + "[data-meta='"+meta[0]+"']" if meta.length > 0
+      $("#actions").find(".action").removeClass('active')
+        .filter(key_search_selector)
+        .addClass("active")
+
+
+
+
+    # COMMON PAPERJS KEYBINDINGS
+    $(document).on "refresh", {}, (event)->
+      selected = paper.project.selectedItems
+
+      switch selected.length
+        when 0
+          $('[data-calc]').html('-')
+        when 1
+          $('[data-calc]').html('-')
+          $('[data-calc="multi"]').html(selected.length+" selected")
+          p = selected[0]
+          $('[data-calc="name"]').html(p.name)
+          $('[data-calc="width"]').html(p.bounds.width.toFixed(2)+" mm")
+          $('[data-calc="height"]').html(p.bounds.height.toFixed(2)+" mm")
+          if p.area != 0
+            area = Math.abs(p.area)
+            $('[data-calc="area"]').html(area.toFixed(0)+" mm²")
+          $('[data-calc="type"]').html(p.className)
+        else
+          $('[data-calc]').html('-')
+          $('[data-calc="multi"]').html(selected.length+" selected")
+          
+      bladders = paper.project.getItems({name: "BLADDER"})
+      switch bladders.length
+        when 0
+          $('[data-mass]').html('-')
+        else
+          area = 0
+          _.each bladders, (b)-> area = area+Math.abs(b.area)
+          base_depth = parseInt($('[name="base_depth"]').val())
+          seal_depth = parseInt($('[name="seal_depth"]').val())
+          depth = base_depth + seal_depth
+          volume = depth * area
+          console.log area, depth
+          mass = (volume * SILICONE_DENSITY).toFixed(1)
+          $('[data-calc="mass"]').html(mass+" g")
+
+
+
+    $(document).on "paperkeydown", {}, (event, key, modifiers, paths)->
+      if modifiers.shift
+        # SHIFT CLUTCH
+        action = switch key
+          when "left" then (p)-> p.rotate(-SiliconeTool.ROTATE_STEP)
+          when "right" then (p)-> p.rotate(SiliconeTool.ROTATE_STEP)
+          when "up" then (p)-> p.scale(1.1)
+          when "down" then (p)-> p.scale(1/1.1)
+          when "}" then (p)-> p.bringToFront()
+          when "{" then (p)-> p.sendToBack()
+          when "r" then (p)-> p.scaling.y *= -1
+          when "backspace"
+            paper.project.clear()
+      else
+        # REGULAR
+        action = switch key
+          when "up" then (p)-> p.translate(0, -SiliconeTool.TRANSLATE_STEP)
+          when "down" then (p)-> p.translate(0, SiliconeTool.TRANSLATE_STEP)
+          when "right" then (p)-> p.translate(SiliconeTool.TRANSLATE_STEP, 0)
+          when "left" then (p)-> p.translate(-SiliconeTool.TRANSLATE_STEP, 0)
+          when "backspace" then (p)-> p.remove()
+          when "r" then (p)-> p.scaling.x *= -1
+          when "d"
+            (p)->
+              dm(p)
+              dp = p.clone_wire()
+              dp.translate new paper.Point SiliconeTool.TRANSLATE_STEP, -SiliconeTool.TRANSLATE_STEP
+              p.selected = false
+          # UNITE PATHS
+          when "u"
+            a = paths.slice(0)
+            a = a[0]
+            _.each paths, (p, i)->
+              b = a.unite(p)
+              a.remove()
+              p.remove()
+              a = b
+            dm(a)
+            false
+          # SUBTRACT
+          when "s"
+            if paths.length == 2
+              a = paths[0].subtract(paths[1])
+              dm(a)
+              (p)-> p.remove()
+            else
+              alertify.error "Two paths needed to subtract."
+         
+    
+      
+      if action and _.isFunction(action)
+        _.each paths, action
+            
+          
+%a#back-button.app.button{href: "http://hybridatelier.uta.edu/projects/38-siloseam"}
+  %img{src: "/hybrid-atelier-dark.png"}
+%a#help-button.ui.button.icon.circular.inverted
+  %i.icon.ui.help
+.ui.modal.help
+  %i.close.icon
+  .header
+    How to Use Siloseam
+  .content
+    .ui.video{"data-id" => "BlMqOIE3d1k", "data-image" => "/tool.png", "data-source" => "youtube"}
+
+    .description
+      %ol
+        %li Clear the canvas (SHIFT + Delete)
+        %li Drag-and-drop your SVG artwork
+        %li Assign (A) a geometry as your BLADDER and a line geometry as your AIRTUBE4 using the dropdown menu.
+        %li Select both bladder and airtube geometries. 
+        %li Outline (1), Generate (2), Stylize (3)
+        %li When satisfied, download the Outline (1) version of the SVG. 
+      %p 
+        Follow the steps in our
+        %a{href:"https://www.instructables.com/id/Inflatable-Silicone-Octopus/"} instructable
+        to generate the final 3D model with Fusion 360 or any CAD program that accepts SVGs. 
+
+
+#sandbox
+  - render :partial => "toolbox"
+  %canvas{id: "main-canvas", resize: "resize"}
+  = render :partial => "sidebar"
+  = render 'collection'
+#legend.panel
+  .ui.segment
+    %table.ui.table.celled.fixed
+      %thead
+        %tr
+          %th{"colspan": 2}
+            %span BLADDER PROPERTIES
+            .ui.label.blue{style: "float: right;", "data-calc": "multi"} -
+      %tbody
+        %tr
+          %td Base Depth (mm)
+          %td
+            .ui.input.fluid
+              %input{name: "base_depth", type: "number", value: 2}
+        %tr
+          %td Seal Depth (mm)
+          %td
+            .ui.input.fluid
+              %input{name: "seal_depth", type: "number", value: 2}
+        %tr
+          %td Silicone Mass
+          %td
+            %span{"data-calc": "mass"} -
+  .ui.segment
+    %table.ui.table.celled.fixed
+      %thead
+        %tr
+          %th{"colspan": 2}
+            %span PROPERTIES
+            .ui.label.blue{style: "float: right;", "data-calc": "multi"} -
+      %tbody
+        %tr
+          %td Name
+          %td
+            %span{"data-calc": "type"} -
+            %span{"data-calc": "name"}
+        %tr
+          %td Width
+          %td{"data-calc": "width"} -
+        %tr
+          %td Height
+          %td{"data-calc": "height"} -
+        %tr
+          %td Area
+          %td{"data-calc": "area"} -
+  .ui.top.attached.active.tab.segment#mouse-actions
+    .ui.message
+      %p 
+        Hold 
+        %b shift 
+        and 
+        %b mouse drag 
+        to move the canvas. 
+      %p 
+        Use your 
+        %b mouse scroll 
+        to 
+        %b zoom in/out.
+  .ui.top.attached.tabular.menu
+    .active.item 
+      .key.special
+        %span
+    .item#shift-key
+      .key.special
+        %span
+          Shift
+  .ui.bottom.attached.active.tab.segment#actions
+    .ui.list.celled
+      .item.cluster.template
+        .content
+          .header{"data-html":"key_cluster"} KEY CLUSTER
+        .list
+          .item.action.template
+            .key.image
+              %span{"data-html":"icon"} K
+            .content
+              .wrapper
+                .header.ui.field{"data-if": "inputize"} 
+                  %span{"data-html":"action"} ACTION
+                  .ui.input.fluid
+                    %select.fluid
+                      %option{value: "BLADDER"} BLADDER
+                      %option{value: "AIRTUBE4"} 1/4" AIRTUBE
+                      %option{value: "AIRTUBE8"} 1/8" AIRTUBE
+                      
+                
+                .description{"data-html":"help"} Joins two paths together.
+              
+#threejs-modal.ui.segment.hidden
+  .ui.segment.header 2.5D Model Generator
+  .ui.segment
+    .threejs-container
+  .ui.segment
+    .ui.actions.buttons
+      .ui.approve.button.green Save
+      .ui.cancel.button.red Cancel

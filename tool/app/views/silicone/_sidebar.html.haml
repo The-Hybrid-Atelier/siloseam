@@ -1,0 +1,20 @@
+:css
+  input{
+    text-align: left;
+  }
+  #sidebar{
+    display: none;
+  }
+
+
+#sidebar.ui.segment
+  .ui.form
+    .ui.field
+      %label MATERIALS
+      %select#materials.dropdown
+        / Name identifiers MUST NOT have any special characters or spaces. Letters and numbers only.
+        %option{"data-style"=> '{"fillColor":"pink","units":"mm"}', "name" => "BLADDER"}
+        %option{"data-style"=> '{"fillColor":null,"strokeColor":"#DDD","strokeWidth":0.125,"units":"in"}', "name" => "AIRTUBE8"}
+        %option{"data-style"=> '{"fillColor":null,"strokeColor":"#DDD","strokeWidth":0.25,"units":"in"}', "name" => "AIRTUBE4"}
+        %option{"data-style"=> '{"fillColor":null,"strokeColor":"#FF0000","strokeWidth":3,"units":"mm"}', "name" => "AIRPATH"}
+       

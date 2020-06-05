@@ -1,0 +1,241 @@
+:coffeescript
+  files = #{@files.to_json.html_safe};
+  window.collections = undefined
+
+  window.uploadable = (event) ->
+    console.log "DROP!"
+    files = event.originalEvent.dataTransfer.files
+    $("#output").attr("src", URL.createObjectURL(files[0]))
+    filename = $("#output").attr('src')
+    position = paper.view.viewToProject(new (paper.Point)(event.originalEvent.x, event.originalEvent.y))
+    file = files[0]
+    console.log 'Uploaded!', filename, position, event, file
+    
+    if file.type == "image/svg+xml"
+      factory.addSVG 
+        url: filename
+        position: new paper.Point(position.x, position.y)
+    else
+      alertify.error("Only SVG files are allowed.")
+    $(".drop").removeClass('dropping')
+    event.preventDefault()
+
+  disableDrop = (evt) ->
+    $(".drop").addClass('dropping')  
+    evt.preventDefault()
+    return
+
+  disable = (evt) ->
+    $(".drop").removeClass('dropping')  
+    evt.preventDefault()
+    return
+
+
+  enableFileDrop = ()->
+    console.log "FILE ON"
+    dropContainer = $("body")
+    dropContainer.on "dragover", disableDrop
+    dropContainer.on "dragenter", disableDrop  
+    dropContainer.on "drop", uploadable
+    dropContainer.on "dragleave", disableDrop 
+
+  disableFileDrop = ()->
+    console.log "FILE OFF"
+    dropContainer = $("#uploader .drop, body")
+    dropContainer.off "dragover"
+    dropContainer.off "dragenter"
+    dropContainer.off "drop"
+    dropContainer.off "dragleave"
+
+  eventHandlers = ()->
+    $(".dropdown").dropdown()
+    $('#collection .menu > .item').tab().click (e)->
+      e.stopPropagation()
+    $('#collection > .menu').click (e)->
+      $(this).parents('#collection')#.toggleClass("collapsed")
+      e.stopPropagation();
+    $('#collection select').click (e)->
+      e.stopPropagation()
+
+  dropLogic = ()->
+    # FILE DROP LOGIC
+    enableFileDrop()
+    # disableSVGTransfer()
+
+    # $('img').on 'dragstart', (event)->
+      # enableSVGTransfer()
+      # disableFileDrop()
+      # event.originalEvent.dataTransfer.setData 'text', $(this).attr('src')
+
+    # $('img').on 'dragend', (event)->
+      # disableSVGTransfer()
+      # enableFileDrop()
+    # return
+    
+  $ ->
+    console.log "✓ Collection Interactivity Enabled"
+    console.log files
+  
+    eventHandlers()
+    window.collections = new Collection(files)
+
+    dropLogic()
+    
+  
+  # window.svg_droppable = (event) ->
+  #   event.preventDefault()
+  #   event.stopPropagation()
+
+  #   filename = event.originalEvent.dataTransfer.getData('text')
+  #   position = paper.view.viewToProject(new (paper.Point)(event.originalEvent.x, event.originalEvent.y))
+
+  #   if filename.slice(0, 4) == "blob"
+  #     filetype = "svg"
+  #     filename = filename
+  #   else
+  #     filetype = filename.split('.')
+  #     filetype = filetype[filetype.length - 1]
+
+  #   console.log 'Dropped!', filename, position, event, filetype
+  #   if filetype == 'svg'
+  #     factory.addSVG 
+  #       url: filename
+  #       position: new paper.Point(position.x, position.y)
+
+
+  # enableSVGTransfer = ()->
+  #   console.log "SVG ON"
+  #   canvas = $('canvas')
+  #   canvas.on "drop", svg_droppable
+  #   canvas.on "dragover", disable
+  #   canvas.on "dragenter", disable
+  #   canvas.on "dragleave", disable
+
+  # disableSVGTransfer = ()->
+  #   console.log "SVG OFF"
+  #   canvas = $('canvas')
+  #   canvas.off "drop"
+  #   canvas.off "dragover"
+  #   canvas.off "dragenter"
+  #   canvas.off "dragleave"
+  
+    
+:css
+  * {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: -moz-none;
+      -o-user-select: none;
+      user-select: none;
+  }
+
+  .noselect {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  #collection{
+    position: absolute;
+    bottom: 0;
+    left:0 px;
+    background: #F1FCFE;
+    height: 100%;
+    border-radius: 5px;
+    background: #ddd;
+    height: 30%;
+    width: 80%;
+  }
+  
+  #collection-panel{
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+  }
+  #collection-panel .design-file{
+    width: calc(20% - 2px); 
+    height: 200px;
+    border: 1px solid #999;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2px;
+  }
+  
+  .design-file:hover{
+    background: #F1F1F1;
+  }
+
+  #collection.collapsed {
+    bottom: calc(-30% + 60px);
+  }
+  #uploader.active{
+    height: calc(100% - 51px);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .drop{
+    display: none;
+  }
+  .drop.dropping{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.3);
+  }
+  .drop.dropping span{
+    display: flex;
+    color: white;
+    border: dashed 2px #999;  
+    font-size: 2em;
+    width: calc(80% - 30px);
+    height: calc(100% - 30px);
+    margin: 15px;
+    padding: 30px;
+    background: rgba(0,0,0, 0.4);
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  #uploader img{
+    border: 1px solid #999;
+    height: 100%;
+    flex: 1;
+    margin-right: 5px;
+  }
+  #collection .ui.message{
+    position: relative;
+    top: -8px;
+  }
+  
+#collection.collapsed
+  .ui.top.attached.tabular.menu
+    %a.item
+      %button#download.ui.button.download.blue Download
+    .ui.message
+      We recommend using Chrome when using this app. This is a research tool and bugs are expected. Drop us an email if you are experiencing critical errors
+      = link_to "here.", "mailto:hybrid.atelier.uta@gmail.com"
+
+  /   %a.active.item{"data-tab" => "upload"} Upload
+  /   %a.item{"data-tab" => "load"} Library
+  /   %a.item
+    
+  #uploader.ui.bottom.attached.active.tab.segment{"data-tab" => "upload"}
+    .drop
+      %span DRAG AND DROP SVG FILES
+    %img#output
+
+  / .ui.bottom.attached.tab.segment{"data-tab" => "load"}
+  /   %select#collection-type.ui.dropdown
+  /   #collection-panel
+

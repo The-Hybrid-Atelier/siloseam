@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+      #{params[:action].humanize}
+    /
+      <script type="text/javascript" src="//use.typekit.net/duw7epu.js"></script>
+      <script>
+      try { Typekit.load(); } catch (e) {}
+      </script>
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
+  %body
+    = yield

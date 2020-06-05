@@ -1,0 +1,74 @@
+!!!
+%html{:lang => "en"}
+  %head
+    / Standard Meta
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
+    - title = params[:controller].humanize.upcase
+    - title = title == "APPLICATION"? "HOME": title
+    %title
+      Hybrid Atelier - #{title}
+   
+    = javascript_include_tag "application"
+    = stylesheet_link_tag    "application", media: "all"
+    = stylesheet_link_tag "icon.min"
+    
+    - if params[:controller] != "application"
+      = stylesheet_link_tag    params[:controller], media: "all"
+      = javascript_include_tag params[:controller]
+
+    / Global site tag - TypeKit
+    %script{:src => "https://use.typekit.net/swf3anw.js"}
+    :javascript
+      try{Typekit.load({ async: true });}catch(e){}
+  
+    / Global site tag (gtag.js) - Google Analytics
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-85311911-30"}
+
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-153089820-1');
+
+    = csrf_meta_tags
+    :coffeescript
+      $ ->
+        $('.ui.sidebar').sidebar(
+            context: $('.ui.pushable.segment')
+            transition: 'overlay'
+        ).sidebar('attach events', '#mobile_item')
+    
+
+  %body
+    .ui.pushable.segment
+      .ui.sidebar.vertical.menu
+        .item.ui.logo
+          %a{href:"/"}
+            %img.ui{:src => "/hybrid_atelier.png", :alt => "The Hybrid Atelier"}
+        %a.item{:href => "https://hybridatelier.uta.edu", :name => "home"} Back to Home
+      .ui.pusher
+        .ui.segment.basic
+          .ui.container.text
+            - if notice
+              %ui.label.green= notice
+            - if alert
+              %ui.label.red= alert
+            = yield
+
+            .ui.vertical.footer.segment
+              .ui.center.aligned.container
+                %p 
+                  %a{:href => "/"}
+                    %strong The Hybrid Atelier
+                  © The University of Texas at Arlington 
+                  - if Time.new.year == 2019
+                    = 2019
+                  -else
+                    = "2019-"+Time.new.year.to_s
+                  %br
+                  %em
+                    Last updated 
+                    10 April 2020
+

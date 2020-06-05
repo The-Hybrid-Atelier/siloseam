@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+      Proxies - #{params[:action].humanize}
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag params[:controller], media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag params[:controller], 'data-turbolinks-track' => true
+    /
+      <script type="text/javascript" src="//use.typekit.net/duw7epu.js"></script>
+    :javascript
+      // try { Typekit.load(); } catch (e) {}
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
+    :javascript
+      $(function(){
+      		// PREVENT BROWSER BUMP
+      		$(window).on('scroll', function(e){
+      		   scrollAmount = $(this).scrollTop();
+      		   if(scrollAmount < 1){
+      		      $(this).scrollTop(1);
+      		   }
+      		   if(scrollAmount > $(document).height() - $(window).height()){
+      		      $(this).scrollTop($(window).height());
+      		   }
+      		});
+      	})
+  %body
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
+    = yield

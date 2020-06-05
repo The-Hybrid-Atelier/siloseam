@@ -1,0 +1,191 @@
+// Place all the styles related to the paperscraps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the fluis controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+* require normalize-rails
+*= require_self
+*/
+@import 'semantic-ui';
+
+.template{
+	display: none!important;
+}
+html, body, #sandbox{
+	width: 100% !important;
+	height: 100% !important;
+	overflow: hidden !important;
+}
+#sandbox{
+	width: 80% !important;
+}
+#sandbox canvas{
+	cursor: pointer;
+	height: 100%;
+	width: 100%;
+	background: #00A8E1;
+}
+
+/* HOTKEY PANEL*/
+/* Source: https://codepen.io/rizkykurniawanritonga/pen/wospJ */
+.header:not(.inputize){
+	.input{ display: none; }
+}
+.header.inputize{
+	width: 100%;
+	.input{
+		select{
+			padding: 0 2px;
+		}
+	}
+}
+.help{
+	.description{
+		display: block !important;
+	}
+	.item .wrapper{
+		height: 100%;
+	}
+}
+
+
+#legend.panel{
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 20%;
+	height: 100%;
+	background: white;
+	z-index: 100;
+	.item .wrapper{
+		width: 100%;
+		height: 40px;
+	}
+	.item .content .wrapper{
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: flex-start;
+	}
+	
+	.description{
+		display: none;
+	}
+}
+
+div.key
+{
+	background: white;
+	width:35px;
+	height: 37px;
+	padding: 1px;
+	margin: 10px;
+}
+.menu div.key.special{
+	margin: 1px;
+}
+#legend .ui.tabular.menu .item{
+	padding: 4px;
+	min-width: 40px;
+}
+div.key > span
+{
+	display: block;
+	width: 35px;
+	height: 35px;
+	border: 1px solid #a9a9a9;
+	border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-webkit-border-radius: 2px 2px 2px 2px;
+	font-size: 12px;
+	-moz-box-sizing: border-box !important;
+	-webkit-box-sizing: border-box !important;
+	box-sizing: border-box !important;
+	text-align: center;
+	padding-top: 10px;
+	color: #7c7c7c;
+	-webkit-box-shadow: 0px 3px 0px -2px rgba(255,255,255,1), 0px 2px 0px 0px rgba(169,169,169,1);
+	-moz-box-shadow: 0px 3px 0px -2px rgba(255,255,255,1), 0px 2px 0px 0px rgba(169,169,169,1);
+	box-shadow: 0px 3px 0px -2px rgba(255,255,255,1), 0px 2px 0px 0px rgba(169,169,169,1);
+	cursor: pointer;
+}
+
+div.key > span:hover, .active > div.key > span
+{
+	background-color: #75b4fb;
+	border: 1px solid #5a88c5;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0px 3px 0px -2px rgba(117,180,251,1), 0px 2px 0px 0px rgba(90,136,197,1);
+	-moz-box-shadow: 0px 3px 0px -2px rgba(117,180,251,1), 0px 2px 0px 0px rgba(90,136,197,1);
+	box-shadow: 0px 3px 0px -2px rgba(117,180,251,1), 0px 2px 0px 0px rgba(90,136,197,1);
+	cursor: pointer;
+}
+
+div.key > span:active, .active > div.key > span
+{
+	margin-top: 2px;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+div.key.special > span
+{
+	padding-top: 15px;
+	font-size: 11px;
+}
+
+div.key.icon > span
+{
+	font-size: 14px;
+}
+/* END HOTKEY PANEL*/
+
+input{
+	text-align: right;
+}
+
+
+#dimensions{
+	position: absolute;
+	right: 3.8%;
+	top: 1%;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	background: white;
+	li{
+		list-style-type:none;
+	}
+}
+
+#zoom{
+	position: absolute;
+	left: 3.8%;
+	top: 1%;
+}
+table img{
+	width: 100%;
+}
+.break-padding{
+	display: block;
+	margin: 8px auto;
+	border: none;
+	width: 100% !important;
+}
+
+.dg {
+   font: 400 14px Verdana, Arial, sans-serif;
+   text-shadow: white 0 0 0;
+} 
+
+.dg .c select {
+   color: black !important;	
+}
+
+.hidden{
+	display: none;
+}
