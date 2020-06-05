@@ -1,4 +1,4 @@
-#Siloseam Tool
+Siloseam Tool
 =========
 
 This application takes an annotated SVG files and produces SVGs for custom bladder molds. 
